@@ -1,13 +1,16 @@
-import * as Redis from 'ioredis';
-import { Observable } from 'rxjs/Observable';
+import * as Redis from "ioredis";
+import {Observable} from "rxjs/Observable";
 
 export class PubsubManager {
 
     private options: Redis.RedisOptions;
     private redisClient: Redis.Redis;
+    private topicMaps: Map<string, Observable<any>>;
+
     constructor(host?: string, port?: number, options?: Redis.RedisOptions) {
         this.options = Object.assign({}, this.getDefaultOptions(host, port), options);
         this.redisClient = new Redis(this.options);
+        this.topicMaps = new Map();
     }
 
     public publish(topic: string, message: string) {
@@ -15,16 +18,34 @@ export class PubsubManager {
     }
 
     public consume(topic: string): Observable<any> {
-        return Observable.create(observer => {
-            this.redisClient.subscribe(topic, (err, res) => {
-                if(err) {
+        return (this.topicMaps.has(topic)) ? (this.topicMaps.get(topic)) : this.createNewTopicObservable(topic);
+    }
+
+    public unsubscribe(topic: string) {
+        this.redisClient.unsubscribe(topic);
+        this.topicMaps.delete(topic);
+    }
+
+    private createNewTopicObservable(topic: string) {
+        let newObservable = Observable.create(observer => {
+            this.redisClient.subscribe(topic, (err, numberOfChannels) => {
+                if (err) {
+                    console.log('Got error- ', err)
                     observer.error(err);
                 }
                 else {
-                    observer.next(res);
+                    console.log('connected to new ', numberOfChannels);
+                }
+            })
+            this.redisClient.on('message', (channel, message) => {
+                if(channel === topic) {
+                    console.log('got new message- ', message);
+                    observer.next(message);
                 }
             })
         });
+        this.topicMaps.set(topic, newObservable);
+        return newObservable;
     }
 
     private getDefaultOptions(host?: string, port?: number): Redis.RedisOptions {
