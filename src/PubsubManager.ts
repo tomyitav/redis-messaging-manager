@@ -27,10 +27,12 @@ export class PubsubManager {
     }
 
     private createNewTopicObservable(topic: string) {
+        let shouldAddToSubscribedTopics: boolean = true;
         let newObservable = Observable.create(observer => {
             this.redisClient.subscribe(topic, (err, numberOfChannels) => {
                 if (err) {
-                    console.log('Got error- ', err)
+                    console.log('Got error- ', err);
+                    shouldAddToSubscribedTopics = false;
                     observer.error(err);
                 }
                 else {
@@ -44,7 +46,9 @@ export class PubsubManager {
                 }
             })
         });
-        this.topicMaps.set(topic, newObservable);
+        if(shouldAddToSubscribedTopics){
+            this.topicMaps.set(topic, newObservable);
+        }
         return newObservable;
     }
 
