@@ -13,13 +13,13 @@
   "license": "ISC",
   "dependencies": {
     "ioredis": "^3.2.2",
-    "nodemon": "1.11.0",
     "rxjs": "^5.5.8"
   },
   "devDependencies": {
     "@types/ioredis": "^3.2.7",
     "@types/mocha": "2.2.41",
     "@types/node": "7.0.22",
+    "nodemon": "1.11.0",
     "eslint": "4.0.0",
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-import": "2.3.0",
