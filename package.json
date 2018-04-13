@@ -1,6 +1,6 @@
 {
   "name": "redis-messenger",
-  "version": "0.0.1",
+  "version": "0.0.0-development",
   "description": "",
   "keywords": [],
   "main": "dist/redis-messenger.umd.js",
@@ -32,7 +32,9 @@
     "semantic-release": "semantic-release",
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
-    "travis-deploy-once": "travis-deploy-once"
+    "travis-deploy-once": "travis-deploy-once",
+    "prepush": "npm run test:prod && npm run build",
+    "commitmsg": "validate-commit-msg"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [

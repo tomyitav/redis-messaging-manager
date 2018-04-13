@@ -64,7 +64,7 @@ export class PubsubManager {
         let delay = Math.min(100 + times * 2, 2000)
         return delay
       },
-      reconnectOnError: err => true
+      reconnectOnError: () => true
     }
   }
 }
