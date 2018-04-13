@@ -1,5 +1,6 @@
 import * as Redis from 'ioredis'
 import { Observable } from 'rxjs/Observable'
+import * as Promise from 'bluebird'
 
 export class PubsubManager {
   private options: Redis.RedisOptions
@@ -16,7 +17,7 @@ export class PubsubManager {
     this.topicMaps = new Map()
   }
 
-  public publish(topic: string, message: string) {
+  public publish(topic: string, message: string): Promise<number> {
     return this.redisClient.publish(topic, message)
   }
 
