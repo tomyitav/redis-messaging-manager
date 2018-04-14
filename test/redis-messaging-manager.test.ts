@@ -1,5 +1,3 @@
-import DummyClass from '../src/redis-messenger'
-
 /**
  * Dummy test
  */

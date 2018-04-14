@@ -7,7 +7,7 @@ import json from 'rollup-plugin-json'
 
 const pkg = require('./package.json')
 
-const libraryName = 'redis-messenger'
+const libraryName = 'redis-messaging-manager'
 
 export default {
   input: `src/${libraryName}.ts`,

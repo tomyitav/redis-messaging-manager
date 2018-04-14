@@ -1,18 +1,18 @@
 {
-  "name": "redis-messenger",
+  "name": "redis-messaging-manager",
   "version": "0.0.0-development",
   "description": "",
   "keywords": [],
-  "main": "dist/redis-messenger.umd.js",
-  "module": "dist/redis-messenger.es6.js",
-  "typings": "dist/types/redis-messenger.d.ts",
+  "main": "dist/redis-messaging-manager.umd.js",
+  "module": "dist/redis-messaging-manager.es6.js",
+  "typings": "dist/types/redis-messaging-manager.d.ts",
   "files": [
     "dist"
   ],
   "author": "Tom <tomyitav@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomyitav/redis-messenger.git"
+    "url": "https://github.com/tomyitav/redis-messaging-manager.git"
   },
   "license": "MIT",
   "engines": {
