@@ -1,7 +1,7 @@
 {
   "name": "redis-messaging-manager",
   "version": "0.0.4",
-  "description": "",
+  "description": "Pubsub messaging library, using redis and rxjs",
   "keywords": [],
   "main": "dist/redis-messaging-manager.umd.js",
   "module": "dist/redis-messaging-manager.es6.js",
