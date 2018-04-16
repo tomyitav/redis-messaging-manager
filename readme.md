@@ -18,7 +18,7 @@ The two core functions for messaging are `publish` and `consume`
 
 ### Examples for usage
 
-Examples for using the library are provided [here](https://github.com/tomyitav/redis-messaging-manager-example)
+Examples for using the library are provided [here](https://github.com/tomyitav/redis-messaging-manager-examples)
 
 ### Out of the box features
 
