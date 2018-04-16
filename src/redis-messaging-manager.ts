@@ -29,6 +29,9 @@ export class PubsubManager {
 
   public unsubscribe(topic: string) {
     this.redisClient.unsubscribe(topic)
+    if (this.topicMaps.has(topic)) {
+      this.topicMaps.get(topic).complete()
+    }
     this.topicMaps.delete(topic)
   }
 
@@ -41,12 +44,14 @@ export class PubsubManager {
           shouldAddToSubscribedTopics = false
           observer.error(err)
         } else {
-          console.log('connected to new ', numberOfChannels)
+          console.log(
+            'connected to new channels, number is- ',
+            numberOfChannels
+          )
         }
       })
       this.redisClient.on('message', (channel, message) => {
         if (channel === topic) {
-          console.log('got new message- ', message)
           observer.next(message)
         }
       })
