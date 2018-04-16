@@ -29,9 +29,6 @@ export class PubsubManager {
 
   public unsubscribe(topic: string) {
     this.redisClient.unsubscribe(topic)
-    if (this.topicMaps.has(topic)) {
-      this.topicMaps.get(topic).complete()
-    }
     this.topicMaps.delete(topic)
   }
 
