@@ -1,5 +1,7 @@
 # redis-messaging-manager
 
+[![Build Status](https://travis-ci.org/tomyitav/redis-messaging-manager.svg?branch=master)](https://travis-ci.org/tomyitav/redis-messaging-manager)
+
 A super simple, instant pubsub messaging library, using
  
 + [ioredis library](https://github.com/luin/ioredis)
