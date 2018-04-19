@@ -6,15 +6,13 @@ export class PubsubManager {
   private options: Redis.RedisOptions
   private redisClient: Redis.Redis
   private topicMaps: Map<string, Observable<any>>
+  private serverEventsToObservables: Map<ServerEvent, Observable<any>>
 
-  constructor(host?: string, port?: number, options?: Redis.RedisOptions) {
-    this.options = Object.assign(
-      {},
-      this.getDefaultOptions(host, port),
-      options
-    )
+  constructor(options?: Redis.RedisOptions) {
+    this.options = Object.assign({}, this.getDefaultOptions(), options)
     this.redisClient = new Redis(this.options)
     this.topicMaps = new Map()
+    this.serverEventsToObservables = new Map()
   }
 
   public publish(topic: string, message: string): Promise<number> {
@@ -25,6 +23,12 @@ export class PubsubManager {
     return this.topicMaps.has(topic)
       ? this.topicMaps.get(topic)
       : this.createNewTopicObservable(topic)
+  }
+
+  public getServerEventStream(eventName: ServerEvent): Observable<any> {
+    return this.serverEventsToObservables.has(eventName)
+      ? this.serverEventsToObservables.get(eventName)
+      : this.createNewEventObservable(eventName)
   }
 
   public unsubscribe(topic: string) {
@@ -59,10 +63,20 @@ export class PubsubManager {
     return newObservable
   }
 
-  private getDefaultOptions(host?: string, port?: number): Redis.RedisOptions {
+  private createNewEventObservable(event: ServerEvent): Observable<any> {
+    let eventObservable = Observable.create(observer => {
+      this.redisClient.on(event, () => {
+        observer.next()
+      })
+    })
+    this.serverEventsToObservables.set(event, eventObservable)
+    return eventObservable
+  }
+
+  private getDefaultOptions(): Redis.RedisOptions {
     return {
-      host: host || 'localhost',
-      port: port || 6379,
+      host: 'localhost',
+      port: 6379,
       retryStrategy: times => {
         let delay = Math.min(100 + times * 2, 2000)
         return delay
@@ -71,3 +85,11 @@ export class PubsubManager {
     }
   }
 }
+
+export type ServerEvent =
+  | 'connect'
+  | 'ready'
+  | 'error'
+  | 'close'
+  | 'reconnecting'
+  | 'end'
