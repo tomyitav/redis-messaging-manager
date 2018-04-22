@@ -19,6 +19,18 @@ export class PubsubManager {
     return this.redisClient.publish(topic, message)
   }
 
+  public publishBulk(topic: string, messagesBulk: Array<string>): Promise<any> {
+    if (messagesBulk && messagesBulk.length > 0) {
+      let publishPipe = this.redisClient.pipeline()
+      for (let message of messagesBulk) {
+        publishPipe = publishPipe.publish(topic, message)
+      }
+      return publishPipe.exec()
+    } else {
+      return Promise.resolve()
+    }
+  }
+
   public consume(topic: string): Observable<any> {
     return this.topicMaps.has(topic)
       ? this.topicMaps.get(topic)

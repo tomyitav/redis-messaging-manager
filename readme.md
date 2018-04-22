@@ -1,7 +1,8 @@
 # redis-messaging-manager
 
 [![Build Status](https://travis-ci.org/tomyitav/redis-messaging-manager.svg?branch=master)](https://travis-ci.org/tomyitav/redis-messaging-manager)
-[![npm](https://img.shields.io/npm/v/redis-messaging-manager.svg?style=flat-square)](https://www.npmjs.com/package/redis-messaging-manager)
+[![npm](https://img.shields.io/npm/v/redis-messaging-manager.svg)](https://www.npmjs.com/package/redis-messaging-manager)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 A super simple, instant pubsub messaging library, using
  
