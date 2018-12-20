@@ -86,7 +86,7 @@
     "@types/node": "9.4.7",
     "@types/bluebird": "3.5.20",
     "colors": "1.1.2",
-    "commitizen": "2.9.6",
+    "commitizen": "2.10.1",
     "coveralls": "3.0.0",
     "cross-env": "5.0.5",
     "cz-conventional-changelog": "2.0.0",
