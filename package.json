@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@types/ioredis": "3.2.7",
-    "@types/jest": "22.2.0",
+    "@types/jest": "22.2.3",
     "@types/node": "9.4.7",
     "@types/bluebird": "3.5.20",
     "colors": "1.1.2",
