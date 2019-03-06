@@ -83,7 +83,7 @@
   "devDependencies": {
     "@types/ioredis": "3.2.7",
     "@types/jest": "22.2.0",
-    "@types/node": "9.4.7",
+    "@types/node": "9.6.45",
     "@types/bluebird": "3.5.26",
     "colors": "1.1.2",
     "commitizen": "2.9.6",
