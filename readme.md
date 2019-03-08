@@ -14,7 +14,7 @@
 A super simple, instant pubsub messaging library, using
  
 + [ioredis library](https://github.com/luin/ioredis)
-+ rxjs 5
++ rxjs
 + typescript
 
 ### Background
