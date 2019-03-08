@@ -1,6 +1,6 @@
 {
   "name": "redis-messaging-manager",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Pubsub messaging library, using redis and rxjs 5",
   "keywords": [
     "redis",
