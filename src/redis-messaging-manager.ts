@@ -1,6 +1,5 @@
 import * as Redis from 'ioredis'
-import { Observable } from 'rxjs/Observable'
-import * as Promise from 'bluebird'
+import { Observable } from 'rxjs'
 
 export class PubsubManager {
   private options: Redis.RedisOptions
@@ -9,7 +8,7 @@ export class PubsubManager {
   private serverEventsToObservables: Map<ServerEvent, Observable<any>>
 
   constructor(options?: Redis.RedisOptions) {
-    this.options = Object.assign({}, this.getDefaultOptions(), options)
+    this.options = { ...this.getDefaultOptions(), ...options }
     this.redisClient = new Redis(this.options)
     this.topicMaps = new Map()
     this.serverEventsToObservables = new Map()
@@ -57,10 +56,7 @@ export class PubsubManager {
           shouldAddToSubscribedTopics = false
           observer.error(err)
         } else {
-          console.log(
-            'connected to new channels, number is- ',
-            numberOfChannels
-          )
+          console.log('connected to new channels, number is- ', numberOfChannels)
         }
       })
       this.redisClient.on('message', (channel, message) => {
@@ -98,10 +94,4 @@ export class PubsubManager {
   }
 }
 
-export type ServerEvent =
-  | 'connect'
-  | 'ready'
-  | 'error'
-  | 'close'
-  | 'reconnecting'
-  | 'end'
+export type ServerEvent = 'connect' | 'ready' | 'error' | 'close' | 'reconnecting' | 'end'
