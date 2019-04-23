@@ -81,7 +81,7 @@
   },
   "dependencies": {
     "ioredis": "4.6.2",
-    "rxjs": "6.4.0"
+    "rxjs": "6.5.1"
   },
   "devDependencies": {
     "@types/ioredis": "4.0.10",
